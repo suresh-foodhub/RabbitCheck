@@ -1,29 +1,28 @@
-// Calculator class
-class Calculator {
-    // Add method
-    add(a, b) {
-      return a + b;
+function generateRandomGraph(numNodes, density, minWeight, maxWeight) {
+    let graph = [];
+    
+    // Initialize the graph with empty arrays
+    for (let i = 0; i < numNodes; i++) {
+        graph.push([]);
     }
-  
-    // Subtract method
-    subtract(a, b) {
-      return a - b;
+    
+    // Populate the graph with random edges
+    for (let i = 0; i < numNodes; i++) {
+        for (let j = 0; j < numNodes; j++) {
+            if (i !== j && Math.random() < density) {
+                const weight = Math.floor(Math.random() * (maxWeight - minWeight + 1)) + minWeight;
+                graph[i].push({ node: j, weight: weight });
+            }
+        }
     }
-  
-    // Multiply method
-    multiply(a, b) {
-      return a * b;
-    }
-  
-    // Divide method
-    divide(a, b) {
-      if (b === 0) {
-        throw new Error("Division by zero is not allowed");
-      }
-      return a / b;
-    }
-  }
-  
-  // Export Calculator class
-  module.exports = Calculator;
-  
+    
+    return graph;
+}
+
+// Example usage
+const numNodes = 5;
+const density = 0.5; // Adjust density as needed (0 to 1)
+const minWeight = 1;
+const maxWeight = 10;
+const randomGraph = generateRandomGraph(numNodes, density, minWeight, maxWeight);
+console.log(randomGraph);
